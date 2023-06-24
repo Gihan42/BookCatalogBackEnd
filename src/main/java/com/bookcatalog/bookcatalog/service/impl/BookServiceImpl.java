@@ -24,8 +24,7 @@ public class BookServiceImpl implements BooksService {
     public String saveBook(BooksDto dto) {
         Books books = booksRepo.findByBookName(dto.getBookName());
         if (Objects.equals(books, null)){
-            Books map = modelMapper.map(dto, Books.class);
-            booksRepo.save(map);
+            booksRepo.save(modelMapper.map(dto, Books.class));
             return "success";
         }
         throw new RuntimeException("Book Name Already Exist!");
@@ -33,7 +32,12 @@ public class BookServiceImpl implements BooksService {
 
     @Override
     public String updateBook(BooksDto dto) {
-        return null;
+        Books books = booksRepo.findById(dto.getBookId());
+        if (!Objects.equals(books,null)){
+            booksRepo.save(modelMapper.map(dto, Books.class));
+            return "success";
+        }
+        throw new RuntimeException("Book Name Already Exist!");
     }
 
     @Override

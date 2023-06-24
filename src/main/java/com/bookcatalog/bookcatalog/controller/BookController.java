@@ -24,4 +24,13 @@ public class BookController {
                 HttpStatus.CREATED
         );
     }
+
+    @PutMapping
+    public ResponseEntity<StandardResponse> updateBook(@RequestBody BooksDto dto){
+        String s = booksService.saveBook(dto);
+        return new ResponseEntity<>(
+                new StandardResponse(204,s,null),
+                HttpStatus.OK
+        );
+    }
 }
