@@ -33,4 +33,13 @@ public class BookController {
                 HttpStatus.OK
         );
     }
+
+    @DeleteMapping(params = "bookId")
+    public ResponseEntity<StandardResponse> deleteBook(@RequestParam int bookId){
+        String s = booksService.deleteBook(bookId);
+        return new ResponseEntity<>(
+                new StandardResponse(200,s,null),
+                HttpStatus.OK
+        );
+    }
 }

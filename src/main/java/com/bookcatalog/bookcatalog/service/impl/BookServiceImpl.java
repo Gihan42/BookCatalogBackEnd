@@ -37,12 +37,17 @@ public class BookServiceImpl implements BooksService {
             booksRepo.save(modelMapper.map(dto, Books.class));
             return "success";
         }
-        throw new RuntimeException("Book Name Already Exist!");
+        throw new RuntimeException("Book not Exist!");
     }
 
     @Override
     public String deleteBook(int bookId) {
-        return null;
+        Books books = booksRepo.findById(bookId);
+        if (!Objects.equals(books,null)){
+            booksRepo.delete(books);
+            return "success";
+        }
+        throw new RuntimeException("Book not Exist!");
     }
 
     @Override
