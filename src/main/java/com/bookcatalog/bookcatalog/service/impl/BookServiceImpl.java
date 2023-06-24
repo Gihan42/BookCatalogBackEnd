@@ -1,16 +1,34 @@
 package com.bookcatalog.bookcatalog.service.impl;
 
 import com.bookcatalog.bookcatalog.dto.BooksDto;
+import com.bookcatalog.bookcatalog.entity.Books;
+import com.bookcatalog.bookcatalog.repo.BooksRepo;
 import com.bookcatalog.bookcatalog.service.BooksService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookServiceImpl implements BooksService {
+
+    @Autowired
+    BooksRepo booksRepo;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public String saveBook(BooksDto dto) {
-        return null;
+        Books books = booksRepo.findByBookName(dto.getBookName());
+        if (Objects.equals(books, null)){
+            Books map = modelMapper.map(dto, Books.class);
+            booksRepo.save(map);
+            return "success";
+        }
+        throw new RuntimeException("Book Name Already Exist!");
     }
 
     @Override

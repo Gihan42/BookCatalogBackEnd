@@ -11,6 +11,7 @@ public class BooksDto {
     private int bookId;
     private String  bookName;
     private String  description;
+    private String  category;
     private String  author;
     private double price;
 }
