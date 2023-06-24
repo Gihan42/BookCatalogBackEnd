@@ -22,8 +22,8 @@ public class BookController {
     public ResponseEntity<StandardResponse> saveBook(@RequestBody BooksDto dto){
         String s = booksService.saveBook(dto);
         return new ResponseEntity<>(
-                new StandardResponse(201,s,null),
-                HttpStatus.CREATED
+                new StandardResponse(200,s,null),
+                HttpStatus.OK
         );
     }
 
@@ -31,7 +31,7 @@ public class BookController {
     public ResponseEntity<StandardResponse> updateBook(@RequestBody BooksDto dto){
         String s = booksService.saveBook(dto);
         return new ResponseEntity<>(
-                new StandardResponse(204,s,null),
+                new StandardResponse(200,s,null),
                 HttpStatus.OK
         );
     }
