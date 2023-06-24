@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/books")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -48,6 +50,16 @@ public class BookController {
         BooksDto booksDto = booksService.searchBook(bookId);
         return new ResponseEntity<>(
                 new StandardResponse(200,"success",booksDto),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(path = "/all",params = {"bookName", "category"})
+    public ResponseEntity<StandardResponse> getAllBook(@RequestParam String bookName,
+                                                       @RequestParam String category){
+        List<BooksDto> allBook = booksService.getAllBook(bookName, category);
+        return new ResponseEntity<>(
+                new StandardResponse(200,"success",allBook),
                 HttpStatus.OK
         );
     }

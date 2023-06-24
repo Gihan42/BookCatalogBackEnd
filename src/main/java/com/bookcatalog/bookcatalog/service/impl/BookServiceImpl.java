@@ -62,6 +62,6 @@ public class BookServiceImpl implements BooksService {
 
     @Override
     public List<BooksDto> getAllBook(String bookName, String category) {
-        return null;
+        return modelMapper.map(booksRepo.booksFilter(bookName, category), new TypeToken<List<BooksDto>>(){}.getType());
     }
 }
