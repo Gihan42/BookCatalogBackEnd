@@ -10,5 +10,5 @@ public interface BooksService {
     String updateBook(BooksDto dto);
     String deleteBook(int bookId);
     BooksDto  searchBook(int bookId);
-    List<BooksDto> getAllBook(String value);
+    List<BooksDto> getAllBook(String bookName, String category);
 }

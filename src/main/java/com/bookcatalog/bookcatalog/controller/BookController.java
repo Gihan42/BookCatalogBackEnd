@@ -42,4 +42,13 @@ public class BookController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping(params = "bookId")
+    public ResponseEntity<StandardResponse> getBook(@RequestParam int bookId){
+        BooksDto booksDto = booksService.searchBook(bookId);
+        return new ResponseEntity<>(
+                new StandardResponse(200,"success",booksDto),
+                HttpStatus.OK
+        );
+    }
 }

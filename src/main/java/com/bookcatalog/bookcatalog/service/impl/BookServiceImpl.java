@@ -5,6 +5,7 @@ import com.bookcatalog.bookcatalog.entity.Books;
 import com.bookcatalog.bookcatalog.repo.BooksRepo;
 import com.bookcatalog.bookcatalog.service.BooksService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,11 +53,15 @@ public class BookServiceImpl implements BooksService {
 
     @Override
     public BooksDto searchBook(int bookId) {
-        return null;
+        Books books = booksRepo.findById(bookId);
+        if (!Objects.equals(books,null)){
+            return modelMapper.map(books, BooksDto.class);
+        }
+        throw new RuntimeException("Book not Exist!");
     }
 
     @Override
-    public List<BooksDto> getAllBook(String value) {
+    public List<BooksDto> getAllBook(String bookName, String category) {
         return null;
     }
 }
